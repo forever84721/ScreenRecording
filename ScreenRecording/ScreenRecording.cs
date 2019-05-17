@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
 namespace ScreenRecording
 {
     public partial class ScreenRecording : Form
@@ -15,13 +14,14 @@ namespace ScreenRecording
         public ScreenRecording()
         {
             InitializeComponent();
+            MaximizeBox = false;
         }
         Recorder rec;
         private void Recording_Click(object sender, EventArgs e)
         {
-            int FrameRate = 10;
-            int Qty = 30;
-            rec = new Recorder(new RecorderParams($"Video_{DateTime.Now.ToString("yyyyMMddHHmmss")}_{FrameRate}_{Qty}.avi", FrameRate, SharpAvi.KnownFourCCs.Codecs.MotionJpeg, Qty));
+            int FrameRateValue = (int)FrameRate.Value;
+            int QualityValue = (int)Quality.Value;
+            rec = new Recorder(new RecorderParams($"Video_{DateTime.Now.ToString("yyyyMMddHHmmss")}_{FrameRateValue}_{QualityValue}.avi", FrameRateValue, SharpAvi.KnownFourCCs.Codecs.X264, QualityValue));
             Recording.Enabled = false;
             Stop.Enabled = true;
         }
